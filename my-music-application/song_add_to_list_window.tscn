@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://clovj6h1k615r"]
+
+[node name="SongAddToListWindow" type="Window" unique_id=1479522509]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(300, 400)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=245765466]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1447793224]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=2053557800]
+layout_mode = 2
+text = "播放列表"
+
+[node name="CheckBox2" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=1690758682]
+layout_mode = 2
+text = "播放列表"
+
+[node name="CheckBox3" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=832583286]
+layout_mode = 2
+text = "播放列表"
+
+[node name="CheckBox4" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=835227247]
+layout_mode = 2
+text = "播放列表"
+
+[node name="CheckBox5" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=527350190]
+layout_mode = 2
+text = "播放列表"
+
+[node name="CheckBox6" type="CheckBox" parent="ScrollContainer/VBoxContainer" unique_id=306940342]
+layout_mode = 2
+text = "播放列表"
+
+[node name="Button" type="Button" parent="." unique_id=1606435470]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "确定"

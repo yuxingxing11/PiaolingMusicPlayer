@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="飘零音乐"
+config/description="飘零本地音乐播放器，简单的播放器。"
+config/version="0.1"
+run/main_scene="uid://dimeqw8056v2l"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+run/max_fps=60
+run/low_processor_mode=true
+config/icon="uid://bww60qhqtm2su"
+config/windows_native_icon="res://piaoling.ico"
+
+[dotnet]
+
+project/assembly_name="MyMusicApplication"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

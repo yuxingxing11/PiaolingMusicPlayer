@@ -1,0 +1,1 @@
+enum PlayerState{Keep, LoopOne, LoopList, Rand}

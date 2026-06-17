@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cb0igmvsl05om"]
+
+[ext_resource type="Script" uid="uid://bn4u4esk0cmlm" path="res://scripts/SongInstance.cs" id="1_flghh"]
+[ext_resource type="PackedScene" uid="uid://rrmu3yj30asv" path="res://mouse_right_panel.tscn" id="2_mi4px"]
+
+[node name="SongInstance" type="VBoxContainer" unique_id=478711024 node_paths=PackedStringArray("fileNameLabel", "ArtistsLabe", "timeLabel", "formatLabel")]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+script = ExtResource("1_flghh")
+fileNameLabel = NodePath("HBoxContainer/SongTitle")
+ArtistsLabe = NodePath("HBoxContainer/Artists")
+timeLabel = NodePath("HBoxContainer/Time")
+formatLabel = NodePath("HBoxContainer/formatName")
+MouseRightPanel = ExtResource("2_mi4px")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1252603576]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1596630369]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="SongTitle" type="Label" parent="HBoxContainer" unique_id=1349297515]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 11.75
+text = "惧怕 角度降低 极大降低敌机敌机的顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶"
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="Artists" type="Label" parent="HBoxContainer" unique_id=1308530340]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 11.75
+text = "周杰伦"
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" unique_id=1632847778]
+layout_mode = 2
+
+[node name="formatName" type="Label" parent="HBoxContainer" unique_id=765056450]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+text = "mp3"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=2048662323]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="HBoxContainer" unique_id=210531184]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+text = "04:03"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=1073586526]
+layout_mode = 2
+theme_override_constants/margin_right = 10
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=39790579]
+layout_mode = 2
+
+[connection signal="mouse_entered" from="." to="." method="On_Mouse_Entered"]
+[connection signal="mouse_exited" from="." to="." method="On_Mouse_Exited"]
