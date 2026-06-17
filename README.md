@@ -1,11 +1,13 @@
 列表界面：
 
-<img width="574" height="347" alt="屏幕截图 2026-06-17 135528" src="https://github.com/user-attachments/assets/61a0d97b-f5a7-4a41-92b9-92ec0d49f9fa" />
+<img width="578" height="348" alt="屏幕截图 2026-06-17 201121" src="https://github.com/user-attachments/assets/a71ecaf9-e837-442f-8964-9953d062e423" />
+
 
 ---
 
 歌词界面：
 
-<img width="580" height="352" alt="屏幕截图 2026-06-17 135500" src="https://github.com/user-attachments/assets/1b699f0f-687a-4dc1-9c2b-2c70ba2b19ec" />
+<img width="577" height="347" alt="屏幕截图 2026-06-17 201152" src="https://github.com/user-attachments/assets/d87d3764-f378-429b-8c3d-cebfa76f8c95" />
+
 
 歌词需要和歌曲源文件同名，否则获取不到文件。
