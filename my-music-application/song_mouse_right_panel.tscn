@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://dfqcblt3nenqy"]
-
-[ext_resource type="PackedScene" uid="uid://rrmu3yj30asv" path="res://mouse_right_panel.tscn" id="1_468ku"]
-
-[node name="SongMouseRightPanel" unique_id=525420895 instance=ExtResource("1_468ku")]
-
-[node name="AddToListButton" type="Button" parent="VBoxContainer" parent_id_path=PackedInt32Array(1707115445) index="1" unique_id=1085865302]
-layout_mode = 2
-text = "添加到"
