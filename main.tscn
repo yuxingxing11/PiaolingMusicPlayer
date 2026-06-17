@@ -2,11 +2,22 @@
 
 [ext_resource type="Script" uid="uid://cxywb1ytdtcnt" path="res://scripts/Main.cs" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dmb8mfkruiirm" path="res://scripts/UiController.cs" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bvd2xqn8ph7qj" path="res://scripts/LyricController.cs" id="2_5vw27"]
 [ext_resource type="PackedScene" uid="uid://didm1pwlxvvb7" path="res://list_instance.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cb0igmvsl05om" path="res://song_instance.tscn" id="4_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://pjrdy4x8wcqo" path="res://imags/wallhaven-ly3z2q.png" id="5_272bh"]
 [ext_resource type="Script" uid="uid://deff52ovlm6t2" path="res://scripts/ParticlesManager.cs" id="5_lquwl"]
+[ext_resource type="Theme" uid="uid://b3ni4rtn32e86" path="res://themes/main.tres" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://duihqu4cpf2vb" path="res://click_particles_2d.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cdoglu5qqs2jd" path="res://lyric_Label.tscn" id="6_kek77"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kek77"]
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+draw_center = false
 
 [sub_resource type="Curve" id="Curve_7mycd"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
@@ -21,7 +32,7 @@ point_count = 2
 font_size = 18
 font_color = Color(0.81335783, 0.91177386, 0.9801273, 1)
 
-[node name="Main" type="Control" unique_id=2113232215 node_paths=PackedStringArray("ui", "particlesManager")]
+[node name="Main" type="Control" unique_id=2113232215 node_paths=PackedStringArray("ui", "particlesManager", "lyricController")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,6 +42,16 @@ grow_vertical = 2
 script = ExtResource("1_ig7tw")
 ui = NodePath("UIController")
 particlesManager = NodePath("ParticlesManager")
+lyricController = NodePath("LyricController")
+
+[node name="LyricController" type="Control" parent="." unique_id=1101274534 node_paths=PackedStringArray("lyricScrollContainer", "defaultLrcLabel")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_5vw27")
+lyricScrollContainer = NodePath("../Mid/PageInfo/ScrollContainer")
+defaultLrcLabel = NodePath("../Mid/PageInfo/DefaultLrcLabel")
+lyricLabelScene = ExtResource("6_kek77")
 
 [node name="UIController" type="Control" parent="." unique_id=1192402270 node_paths=PackedStringArray("playingButton", "timeLabel", "processSlider", "PlayingStateButton", "volumeSlider", "MidPanel", "pagePanel", "listPanel", "settingPanel", "listContainer", "songContainer", "addListSubWindow", "addListLineEdit", "currentPlayingLabel", "songsScroll", "addSongFileDialog")]
 anchors_preset = 0
@@ -64,7 +85,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_272bh")
 expand_mode = 1
 
 [node name="Mid" type="Panel" parent="." unique_id=1608332514]
@@ -84,25 +104,44 @@ offset_left = -1152.0
 offset_right = -1152.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MidPanel"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Mid/PageInfo" unique_id=1480563520]
+[node name="ScrollContainer" type="ScrollContainer" parent="Mid/PageInfo" unique_id=1482480323]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.091000006
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.823
-offset_top = 0.03199768
-offset_bottom = -0.3040161
+anchor_bottom = 1.0
+offset_left = 281.0
+offset_top = 157.0
+offset_right = -281.0
+offset_bottom = -157.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 24
-theme_override_font_sizes/bold_italics_font_size = 24
-theme_override_font_sizes/italics_font_size = 24
-theme_override_font_sizes/mono_font_size = 24
+pivot_offset = Vector2(-752, 12)
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Mid/PageInfo/ScrollContainer" unique_id=1012471292]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefaultLrcLabel" type="Label" parent="Mid/PageInfo" unique_id=974085295]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "音乐，是一种享受"
-horizontal_alignment = 1
-vertical_alignment = 1
+label_settings = SubResource("LabelSettings_kek77")
 
 [node name="ListInfo" type="Panel" parent="Mid" unique_id=405872971]
 layout_mode = 1
@@ -111,6 +150,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MidPanel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Mid/ListInfo" unique_id=435678747]
 layout_mode = 1
@@ -124,13 +165,14 @@ grow_vertical = 2
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kek77")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Mid/ListInfo/HBoxContainer/ListsSelect" unique_id=1230804488]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 83.0
+offset_top = 97.0
 offset_bottom = -111.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -148,26 +190,32 @@ layout_mode = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 47.0
-offset_bottom = 78.0
+offset_left = 24.0
+offset_top = 53.0
+offset_right = -26.0
+offset_bottom = 85.0
 grow_horizontal = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "新增播放列表"
 
 [node name="SongsSelect" type="Panel" parent="Mid/ListInfo/HBoxContainer" unique_id=1616866166]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_4c57u")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Mid/ListInfo/HBoxContainer/SongsSelect" unique_id=351612050]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 91.0
-offset_bottom = -119.0
+offset_top = 97.0
+offset_bottom = -108.0
 grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Mid/ListInfo/HBoxContainer/SongsSelect/ScrollContainer" unique_id=2035475550]
 layout_mode = 2
@@ -187,6 +235,8 @@ grow_horizontal = 2
 [node name="AddSongButton" type="Button" parent="Mid/ListInfo/HBoxContainer/SongsSelect/HBoxContainer" unique_id=57907279]
 layout_mode = 2
 size_flags_horizontal = 10
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "添加歌曲"
 
 [node name="MarginContainer5" type="MarginContainer" parent="Mid/ListInfo/HBoxContainer/SongsSelect/HBoxContainer" unique_id=1576389779]
@@ -202,6 +252,8 @@ offset_left = 1152.0
 offset_right = 1152.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MidPanel"
 
 [node name="MouseParticles" type="CPUParticles2D" parent="." unique_id=917684538]
 emitting = false
@@ -226,6 +278,8 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"TopAndBottomPanel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Top" unique_id=856321612]
 layout_mode = 1
@@ -244,22 +298,28 @@ theme_override_constants/margin_left = 20
 
 [node name="Page" type="Button" parent="Top/HBoxContainer" unique_id=1150404555]
 layout_mode = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "歌  词"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Top/HBoxContainer" unique_id=436375472]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 15
 
 [node name="List" type="Button" parent="Top/HBoxContainer" unique_id=1865419669]
 layout_mode = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "列  表"
 
 [node name="MarginContainer3" type="MarginContainer" parent="Top/HBoxContainer" unique_id=728860234]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 15
 
 [node name="Setting" type="Button" parent="Top/HBoxContainer" unique_id=1483093203]
 layout_mode = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "设  置"
 
 [node name="MarginContainer4" type="MarginContainer" parent="Top/HBoxContainer" unique_id=1008078377]
@@ -291,14 +351,20 @@ anchor_bottom = 1.0
 offset_top = -100.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"TopAndBottomPanel"
 
 [node name="Process" type="HSlider" parent="Bom" unique_id=310739502]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_left = 10.0
+offset_right = -10.0
 offset_bottom = 16.0
 grow_horizontal = 2
 mouse_default_cursor_shape = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"ProcessHSlider"
 
 [node name="Playing" type="Button" parent="Bom" unique_id=1074798592]
 layout_mode = 1
@@ -313,6 +379,8 @@ offset_right = 4.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "播放"
 
 [node name="Pre" type="Button" parent="Bom" unique_id=299558684]
@@ -328,6 +396,8 @@ offset_right = -96.0
 offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "上一首"
 
 [node name="Next" type="Button" parent="Bom" unique_id=437541055]
@@ -343,6 +413,8 @@ offset_right = 128.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "下一首"
 
 [node name="Time" type="Label" parent="Bom" unique_id=328417685]
@@ -372,6 +444,8 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "音量"
 mouse_default_cursor_shape = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"ProcessHSlider"
 max_value = 1.0
 step = 0.001
 value = 1.0
@@ -389,6 +463,8 @@ offset_right = -224.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_5vw27")
+theme_type_variation = &"MyButton"
 text = "[顺序播放]"
 
 [node name="ListAddSubWindow" type="Window" parent="." unique_id=1830851545]

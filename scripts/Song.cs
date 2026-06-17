@@ -1,12 +1,16 @@
 using System;
 using Godot;
 using NAudio.Wave;
+using TagLib;
 
 public class Song
 {
+    public string lrcPath;
     public string name;
     public string actress;
     public string fileName;
+    public string[] artists;
+    public string album;
     public string listFrom;
     public TimeSpan time;
     public string format;
@@ -16,8 +20,20 @@ public class Song
         try
         {
             fileName = filePath;
+            lrcPath = fileName.Left(fileName.LastIndexOf('.')) + ".lrc";
+            using (TagLib.File file = TagLib.File.Create(filePath))
+            {
+                name = file.Tag.Title ?? ParseFileName();
+                artists = file.Tag.Performers;
+                if(artists == null)
+                {
+                    artists = new string[1];
+                    artists[1] = "未知歌手";
+                    GD.Print(artists);
+                }
+                album = file.Tag.Album ?? "未知专辑";
+            }
             AudioFileReader fileReader = new AudioFileReader(fileName);
-            name = ParseFileName();
             time = fileReader.TotalTime;
             fileReader.Dispose();
             listFrom = listName;
@@ -27,7 +43,6 @@ public class Song
         {
             fileName = filePath;
             time = new TimeSpan(0);
-            name = ParseFileName();
             format = ParseFormat();
         }
         
@@ -57,6 +72,21 @@ public class Song
         }
 
         return t;
+    }
+
+    public string GetArtists()
+    {
+        string r = null;
+        for (int i = 0; i < artists.Length; ++i)
+        {
+            r += artists[i];
+            if (i + 1 < artists.Length)
+            {
+                r += ", ";
+            }
+        }
+        
+        return r;
     }
 
     private string ParseFileName()

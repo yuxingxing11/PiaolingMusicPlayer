@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 public partial class UiController : Control
 {
@@ -105,7 +106,7 @@ public partial class UiController : Control
         {
             if (songInstances[i].GetSelfSong() == s)
             {
-                int positionY = ((int)songInstances[i].Size.Y + 9) * i - (int)songInstances[i].Size.Y - 9;
+                float positionY = ((int)songInstances[i].Size.Y + 4) * i - (int)songInstances[i].Size.Y - 4;
                 Tween tween = CreateTween();
                 tween.TweenProperty(songsScroll, "scroll_vertical", positionY, 0.3);
             }
@@ -135,8 +136,8 @@ public partial class UiController : Control
             currentPlayingLabel.Text = "...";
             return;
         }
-        
-        currentPlayingLabel.Text = "<" + playingList + ">  " + song.name;
+        currentPlayingLabel.Text = song.artists == null ?
+         "<" + playingList + ">  " + song.name : "<" + playingList + ">  " + song.name + " - " + song.GetArtists();
     }
 
     public void SetSongInfo(Song newSong)

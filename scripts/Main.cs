@@ -6,6 +6,7 @@ public partial class Main : Control
 {
     [Export] private UiController ui;
     [Export] private ParticlesManager particlesManager;
+    [Export] private LyricController lyricController;
 
     MusicsPlayer musicsPlayer;
     ListManager listManager;
@@ -30,6 +31,7 @@ public partial class Main : Control
 
         dataManager.LoadList(listManager);
         Load();
+        lyricController.InitLyrics(listManager.GetCurrentSong().lrcPath);
         ui.SetListInfo(listManager.GetListNames());
         ui.SetSongInfo(listManager.GetCurrentListSongs());
         ui.ChangeCurrentList(listManager.GetCurrentList());
@@ -47,6 +49,7 @@ public partial class Main : Control
     {
         UpdateUI();
         OverPlayWithState();
+        lyricController.ShowLyrics(musicsPlayer.GetCurrentTimeNoMillisecond());
     }
 
     private void Save()
@@ -169,6 +172,7 @@ public partial class Main : Control
         listManager.SetCurrentSong(newSong);
         musicsPlayer.ReadySong(newSong);
         musicsPlayer.Play();
+        lyricController.InitLyrics(newSong.lrcPath);
         ui.SetProcessSliderMax(musicsPlayer.GetLength());
         ui.ChangePlayingText("暂停");
         ui.SetCurrentPlayingLabel(listManager.GetPlayingList(), newSong);
@@ -345,7 +349,7 @@ public partial class Main : Control
             listManager.SetPlayingList(listManager.GetCurrentList());
         }
         ui.FreshListPanel(listManager.GetListNames());
-        ui.ChangeCurrentList(listManager.GetPlayingList());
+        ui.ChangeCurrentList(listManager.GetCurrentList());
         dataManager.SaveList(listManager);
     }
     

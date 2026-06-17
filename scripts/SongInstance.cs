@@ -5,6 +5,7 @@ using Godot;
 public partial class SongInstance : VBoxContainer
 {
     [Export] Label fileNameLabel;
+    [Export] Label ArtistsLabe;
     [Export] Label timeLabel;
     [Export] Label formatLabel;
     [Export] PackedScene MouseRightPanel;
@@ -51,11 +52,13 @@ public partial class SongInstance : VBoxContainer
         fileNameLabel.Text = s.name;
         formatLabel.Text = s.format;
         timeLabel.Text = s.FormatTime();
+        ArtistsLabe.Text = s.GetArtists();
         labelSettings = new LabelSettings();
         labelSettings.FontSize = 20;
         fileNameLabel.LabelSettings = labelSettings;
         timeLabel.LabelSettings = labelSettings;
         formatLabel.LabelSettings = labelSettings;
+        ArtistsLabe.LabelSettings = labelSettings;
         GlobalEvents.EventChangeSongInfo += OnSelected;
     }
 
