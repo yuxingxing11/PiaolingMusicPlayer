@@ -6,4 +6,4 @@
 
 <img width="580" height="352" alt="屏幕截图 2026-06-17 135500" src="https://github.com/user-attachments/assets/1b699f0f-687a-4dc1-9c2b-2c70ba2b19ec" />
 
-歌词需要和文件名同名，否则获取不到文件。
+歌词需要和歌曲源文件名同名，否则获取不到文件。
