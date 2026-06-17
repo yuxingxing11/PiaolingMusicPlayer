@@ -13,6 +13,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_kek77"]
 font_size = 20
 
+[sub_resource type="Gradient" id="Gradient_kek77"]
+colors = PackedColorArray(0.654902, 0.83137256, 1, 1, 0.93022156, 0.964572, 0.6434826, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
 draw_center = false
 
@@ -43,6 +46,12 @@ script = ExtResource("1_ig7tw")
 ui = NodePath("UIController")
 particlesManager = NodePath("ParticlesManager")
 lyricController = NodePath("LyricController")
+
+[node name="ParticlesManager" type="Node2D" parent="." unique_id=1174991079 node_paths=PackedStringArray("mouseParticles", "pageParticles")]
+script = ExtResource("5_lquwl")
+ClickParticles2DScene = ExtResource("6_7mycd")
+mouseParticles = NodePath("../MouseParticles")
+pageParticles = NodePath("../Mid/PageInfo/CPUParticles2D")
 
 [node name="LyricController" type="Control" parent="." unique_id=1101274534 node_paths=PackedStringArray("lyricScrollContainer", "defaultLrcLabel")]
 anchors_preset = 0
@@ -109,11 +118,12 @@ theme_type_variation = &"MidPanel"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Mid/PageInfo" unique_id=1482480323]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.24200001
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 281.0
-offset_top = 157.0
+offset_top = 0.18399048
 offset_right = -281.0
 offset_bottom = -157.0
 grow_horizontal = 2
@@ -142,6 +152,22 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "音乐，是一种享受"
 label_settings = SubResource("LabelSettings_kek77")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Mid/PageInfo" unique_id=759441653]
+position = Vector2(576, 0)
+amount = 100
+lifetime = 10.0
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(576, 10)
+gravity = Vector2(0, 50)
+initial_velocity_max = 92.05
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color = Color(0.65671694, 0.829558, 1, 1)
+color_ramp = SubResource("Gradient_kek77")
 
 [node name="ListInfo" type="Panel" parent="Mid" unique_id=405872971]
 layout_mode = 1
@@ -516,11 +542,6 @@ display_mode = 1
 access = 2
 filters = PackedStringArray("*.mp3", "*.flac", "*wav")
 use_native_dialog = true
-
-[node name="ParticlesManager" type="Node2D" parent="." unique_id=1174991079 node_paths=PackedStringArray("mouseParticles")]
-script = ExtResource("5_lquwl")
-ClickParticles2DScene = ExtResource("6_7mycd")
-mouseParticles = NodePath("../MouseParticles")
 
 [connection signal="pressed" from="Mid/ListInfo/HBoxContainer/ListsSelect/AddListButton" to="UIController" method="On_Add_List_Button_Pressed"]
 [connection signal="pressed" from="Mid/ListInfo/HBoxContainer/SongsSelect/HBoxContainer/AddSongButton" to="UIController" method="On_Add_Song_Button_Pressed"]

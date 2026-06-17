@@ -128,6 +128,7 @@ public class MusicsPlayer
 
     public TimeSpan GetCurrentTimeNoMillisecond()
     {
+        if (fileReader == null) return TimeSpan.Zero;
         return new TimeSpan(fileReader.CurrentTime.Hours, fileReader.CurrentTime.Minutes, fileReader.CurrentTime.Seconds);
     }
 

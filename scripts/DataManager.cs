@@ -1,8 +1,17 @@
 using System.IO;
 using System.Collections.Generic;
+using Godot;
 
 public class DataManager
 {
+
+    public void DeleteListFile(string listName)
+    {
+        if(File.Exists("save/" + listName + ".list"))
+        {
+            File.Delete("save/" + listName + ".list");
+        }
+    }
 
     public void SaveList(ListManager listManager)
     {

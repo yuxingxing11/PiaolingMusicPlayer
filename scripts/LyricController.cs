@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Xml.Schema;
 
 public partial class LyricController : Control
 {
@@ -13,9 +14,12 @@ public partial class LyricController : Control
     TimeSpan currentTime;
     TimeSpan lastTime;
     int defaultFontSize = 20;
+    bool isCurrentLrc;
 
     public void InitLyrics(string filePath)
     {
+        if (filePath == null) return;
+        isCurrentLrc = false;
         lastTime = TimeSpan.Zero;
         currentTime = TimeSpan.Zero;
         defaultLrcLabel.Visible = false;
@@ -43,25 +47,27 @@ public partial class LyricController : Control
     public void ShowLyrics(TimeSpan _currentTime)
     {
         if (lyrics == null) return;
-        if (_currentTime == currentTime) return;
+
+        if (_currentTime > currentTime || _currentTime < currentTime)
+        {
+            isCurrentLrc = false;
+        } 
 
         foreach (var item in lyrics)
         {
-            if (item.Key == _currentTime)
+            if (item.Key == _currentTime && (!isCurrentLrc))
             {
+                isCurrentLrc = true;
                 lastTime = currentTime;
                 currentTime = _currentTime;
                 Tween tween = CreateTween();
                 int index = lyrics[_currentTime].GetIndex();
+                lyrics[lastTime].LabelSettings.FontSize = defaultFontSize;
+                lyrics[lastTime].LabelSettings.FontColor = Colors.White;
                 tween.TweenProperty(lyricScrollContainer, "scroll_vertical",
                 index * (lyrics[_currentTime].Size.Y + 4) - lyricScrollContainer.Size.Y / 2+20, 0.1);
-                lyrics[currentTime].LabelSettings.FontSize += 6;
+                lyrics[currentTime].LabelSettings.FontSize = defaultFontSize+6;
                 lyrics[currentTime].LabelSettings.FontColor = Colors.SkyBlue;
-                if(lastTime.TotalSeconds > 0)
-                {
-                    lyrics[lastTime].LabelSettings.FontSize = defaultFontSize;
-                    lyrics[lastTime].LabelSettings.FontColor = Colors.White;
-                }
             }
         }
     }

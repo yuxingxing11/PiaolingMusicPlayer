@@ -29,9 +29,13 @@ public partial class Main : Control
     {
         DisplayServer.WindowSetMinSize(DisplayServer.WindowGetSize());
 
+        if (!Directory.Exists("save"))
+        {
+            Directory.CreateDirectory("save");
+        }
         dataManager.LoadList(listManager);
         Load();
-        lyricController.InitLyrics(listManager.GetCurrentSong().lrcPath);
+        lyricController.InitLyrics(listManager.GetCurrentSong()?.lrcPath);
         ui.SetListInfo(listManager.GetListNames());
         ui.SetSongInfo(listManager.GetCurrentListSongs());
         ui.ChangeCurrentList(listManager.GetCurrentList());
@@ -333,6 +337,7 @@ public partial class Main : Control
     {
         string listName = (e as ListName_EventArgs).listName;
         listManager.RemoveList(listName);
+        dataManager.DeleteListFile(listName);
         if (listName == listManager.GetCurrentList())
         {
             listManager.SetCurrentList("默认列表");

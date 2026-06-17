@@ -1,7 +1,6 @@
 using System;
 using Godot;
 using NAudio.Wave;
-using TagLib;
 
 public class Song
 {

@@ -24,6 +24,13 @@ public class ListManager
         playingList = listName;
     }
 
+    public int GetListSongCount(string listName)
+    {
+        if (Lists[listName] == null) return 0;
+        
+        return Lists[listName].Count();
+    }
+
     public Song GetCurrentNextSong()
     {
         for (int i = 0; i < Lists[playingList].Count; ++i)

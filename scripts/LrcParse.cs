@@ -17,7 +17,6 @@ public static class LrcParser
 
         if (!File.Exists(filePath))
         {
-            GD.Print("not exist");
             return null;
         }
             
